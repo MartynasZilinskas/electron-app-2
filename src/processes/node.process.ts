@@ -1,9 +1,9 @@
 process.on("message", msg => {
-    console.log("Message from parent:", msg);
+    console.info("Message from parent:", msg);
 });
 
-let counter = 0;
+let COUNTER = 0;
 
 setInterval(() => {
-    process.send!({ counter: counter++ });
+    process.send({ counter: COUNTER++ });
 }, 1000);
