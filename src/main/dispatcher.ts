@@ -16,8 +16,8 @@ class MainDispatcher extends Dispatcher {
      * Emits action to all BrowserWindow.
      */
     private sendToBrowserWindows<TAction extends AppAction>(action: TAction): void {
-        for (const window of BrowserWindow.getAllWindows()) {
-            window.webContents.send(DATA_CHANNEL_NAME, action);
+        for (const $window of BrowserWindow.getAllWindows()) {
+            $window.webContents.send(DATA_CHANNEL_NAME, action);
         }
     }
 
