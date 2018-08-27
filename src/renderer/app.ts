@@ -1,8 +1,14 @@
-import { ipcRenderer } from "electron";
-import { DATA_CHANNEL_NAME } from "../contracts/dispatcher";
+import { rendererDispatcher } from "./dispatcher";
+import { AppAction } from "../contracts/dispatcher";
 
 document.getElementById("root").innerHTML = "Hello World!";
 
-setInterval(() => {
-    ipcRenderer.send(DATA_CHANNEL_NAME, { type: "RENDERER", data: "Hello World" });
-}, 1000);
+interface RendererAction extends AppAction {
+    type: "RENDERER";
+    data: string;
+}
+
+rendererDispatcher.dispatch<RendererAction>({
+    type: "RENDERER",
+    data: "Hello World!"
+});

@@ -1,19 +1,14 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import * as url from "url";
 import * as path from "path";
-import { fork } from "child_process";
-import { DATA_CHANNEL_NAME, AppAction } from "../contracts/dispatcher";
+// import { fork } from "child_process";
 
-const forked = fork(path.join(__dirname, "../processes/node.process"));
+import { DATA_CHANNEL_NAME, AppAction } from "../contracts/dispatcher";
+import { mainDispatcher } from "./dispatcher";
+// const forked = fork(path.join(__dirname, "../processes/node.process"));
 
 const IS_SERVE: boolean = process.argv.indexOf("--serve") !== -1;
 const DEV_PORT: number = 4000;
-
-forked.on("message", msg => {
-    console.info("Message from child", msg.counter);
-});
-
-forked.send({ hello: "world" });
 
 ipcMain.on(DATA_CHANNEL_NAME, (_, data: AppAction) => {
     console.info(data);
@@ -38,4 +33,6 @@ app.on("ready", () => {
         );
         browserWindow.webContents.openDevTools();
     }
+
+    mainDispatcher.dispatch({ type: "MAIN" });
 });
