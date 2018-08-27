@@ -9,7 +9,7 @@ export class ProccessDispatcher extends Dispatcher {
     }
 
     private onMessage = (message: ProccessMessageData<AppAction>) => {
-        if (message.kind !== "data-channel") {
+        if (message.channel !== "data-channel") {
             return;
         }
 
@@ -18,7 +18,7 @@ export class ProccessDispatcher extends Dispatcher {
 
     public dispatch<TAction extends AppAction>(action: TAction): void {
         const message: ProccessMessageData<AppAction> = {
-            kind: "data-channel",
+            channel: "data-channel",
             action: action
         };
 

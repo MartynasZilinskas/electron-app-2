@@ -19,7 +19,7 @@ export class NodeContainer {
     // tslint:disable-next-line:no-any
     public sendAction(action: AppAction): void {
         const data: ProccessMessageData<AppAction> = {
-            kind: "data-channel",
+            channel: "data-channel",
             action: action
         };
 
@@ -31,7 +31,7 @@ export class NodeContainer {
     }
 
     private onMessage = (message: ProccessMessageData<AppAction>) => {
-        if (message.kind !== "data-channel") {
+        if (message.channel !== "data-channel") {
             return;
         }
 

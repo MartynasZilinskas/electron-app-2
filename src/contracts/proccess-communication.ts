@@ -1,6 +1,6 @@
 import { AppAction } from "./dispatcher";
 
 export interface ProccessMessageData<TAction extends AppAction> {
-    kind: "data-channel";
+    channel: "data-channel";
     action: TAction;
 }
