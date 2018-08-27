@@ -34,5 +34,9 @@ app.on("ready", () => {
         browserWindow.webContents.openDevTools();
     }
 
-    mainDispatcher.dispatch({ type: "MAIN" });
+    mainDispatcher.addListener("*", () => {
+        mainDispatcher.dispatch({
+            type: "Received"
+        });
+    });
 });
