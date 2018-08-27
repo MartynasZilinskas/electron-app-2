@@ -1,14 +1,14 @@
 import { Dispatcher } from "../abstractions/dispatcher";
 import { AppAction } from "../contracts/dispatcher";
-import { ProccessMessageData } from "../contracts/proccess-communication";
+import { ProcessMessageData } from "../contracts/process-communication";
 
-export class ProccessDispatcher extends Dispatcher {
+export class ProcessDispatcher extends Dispatcher {
     constructor() {
         super();
         process.on("message", this.onMessage);
     }
 
-    private onMessage = (message: ProccessMessageData<AppAction>) => {
+    private onMessage = (message: ProcessMessageData<AppAction>) => {
         if (message.channel !== "data-channel") {
             return;
         }
@@ -17,7 +17,7 @@ export class ProccessDispatcher extends Dispatcher {
     };
 
     public dispatch<TAction extends AppAction>(action: TAction): void {
-        const message: ProccessMessageData<AppAction> = {
+        const message: ProcessMessageData<AppAction> = {
             channel: "data-channel",
             action: action
         };
