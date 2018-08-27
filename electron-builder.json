@@ -1,0 +1,17 @@
+{
+    "productName": "TESTAPP",
+    "directories": {
+        "output": "app-builds"
+    },
+    "artifactName": "${name}-${version}-${os}-${arch}.${ext}",
+    "win": {
+        "target": "nsis",
+        "publish": ["github"]
+    },
+    "mac": {
+        "target": ["dmg", "zip"]
+    },
+    "linux": {
+        "target": ["AppImage"]
+    }
+}
