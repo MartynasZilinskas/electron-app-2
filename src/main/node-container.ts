@@ -41,13 +41,11 @@ export class NodeContainer {
     };
 
     private onError = (error: Error) => {
-        console.log("ERROR", error);
         this.process.removeAllListeners();
         this.createProcess();
     };
 
     private onExit = (code: number, signal: any) => {
-        console.log("EXIT", code, signal);
         this.process.removeAllListeners();
         this.createProcess();
     };
