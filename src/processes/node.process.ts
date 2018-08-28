@@ -1,9 +1,19 @@
-process.on("message", msg => {
-    console.info("Message from parent:", msg);
-});
+import { ProcessDispatcher } from "./dispatcher";
+import { CounterAction } from "../contracts/node-actions";
+
+console.info("[NODE] PID", process.pid);
+
+const dispatcher = new ProcessDispatcher();
 
 let COUNTER = 0;
 
 setInterval(() => {
-    process.send({ counter: COUNTER++ });
+    if (COUNTER === 10) {
+        throw new Error("COUNTER reacted 10.");
+    }
+
+    dispatcher.dispatch<CounterAction>({
+        type: "COUNTER",
+        counter: COUNTER++
+    });
 }, 1000);

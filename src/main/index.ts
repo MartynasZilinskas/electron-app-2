@@ -34,9 +34,7 @@ app.on("ready", () => {
         browserWindow.webContents.openDevTools();
     }
 
-    mainDispatcher.addListener("*", () => {
-        mainDispatcher.dispatch({
-            type: "Received"
-        });
+    mainDispatcher.addListener("*", action => {
+        console.info(action);
     });
 });
